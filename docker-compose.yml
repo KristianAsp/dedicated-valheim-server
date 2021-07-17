@@ -1,7 +1,7 @@
-version: "3.9"  # optional since v1.27.0
+version: "3.9"
 services:
   valheim:
-    image:
+    image: 180298458663.dkr.ecr.eu-west-2.amazonaws.com/aspevik/dedicated-valheim-server:latest
     ports:
       - "2456-2458:2456-2458/udp"
     environment:
