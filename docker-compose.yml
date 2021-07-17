@@ -1,0 +1,16 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  valheim:
+    image:
+    ports:
+      - "2456-2458:2456-2458/udp"
+    environment:
+      valheimInstallPath: "${valheimInstallPath}"
+      serverDisplayName: "${serverDisplayName}"
+      serverWorldName: "${serverWorldName}"
+    volumes:
+      - valheimInstallation:${valheimInstallPath}
+      - valheimWorldDatabase:/home/steam/.config/unity3d/IronGate/Valheim/
+volumes:
+  valheimInstallation:
+  valheimWorldDatabase:
