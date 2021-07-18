@@ -1,6 +1,11 @@
 # Use official Steamcmd image
 FROM cm2network/steamcmd:latest
 
+
+# Install a couple of additional binaries
+USER root
+RUN apt-get update && apt-get install -y --no-install-recommends awscli jq
+
 USER steam
 WORKDIR /home/steam
 
@@ -10,4 +15,4 @@ ADD --chown=steam:steam scripts/valheim-server.sh valheim-server.sh
 # If these change, then there are follow-on changes necessary in compose-file volumes.
 RUN mkdir -p /home/steam/valheim-install /home/steam/.config/unity3d/IronGate/Valheim/
 
-ENTRYPOINT ["./scripts/valheim-server.sh"]
+ENTRYPOINT ["./valheim-server.sh"]

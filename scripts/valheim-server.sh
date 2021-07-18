@@ -16,7 +16,7 @@ fi
 
 # Separate by serverWorldName so that we this script works with multiple servers.
 awsSecretId="/valheim/${serverWorldName}/serverPassword"
-serverPassword=$(aws secretsmanager get-secret-value --secret-id "${awsSecretId}" | jq -r .SecretString)
+serverPassword=$(aws --region eu-west-2 secretsmanager get-secret-value --secret-id "${awsSecretId}" | jq -r .SecretString)
 
 if [ $? -ne 0 ]; then
   log_error "Failed to pull server password from AWS SecretsManager with secret-id '${awsSecretId}'"
@@ -29,4 +29,4 @@ fi
 pushd "$valheimInstallPath"
 
 # Start the server
-exec valheim_server.x86_64 -name "${serverDisplayName}" -port "$serverPort" -nographics -batchmode -world "${serverWorldName}" -password "${serverPassword}"
+exec ${valheimInstallPath}/valheim_server.x86_64 -name "${serverDisplayName}" -port "$serverPort" -nographics -batchmode -world "${serverWorldName}" -password "${serverPassword}"
