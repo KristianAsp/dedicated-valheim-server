@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  valheim:
+    image: 180298458663.dkr.ecr.eu-west-2.amazonaws.com/aspevik/dedicated-valheim-server:latest
+    container_name: valheim
+    ports:
+      - "2456-2458:2456-2458/udp"
+    environment:
+      valheimInstallPath: "${valheimInstallPath}"
+      serverDisplayName: "${serverDisplayName}"
+      serverWorldName: "${serverWorldName}"
+    volumes:
+      - valheimInstallation:${valheimInstallPath}
+      - valheimWorldDatabase:/home/steam/.config/unity3d/IronGate/Valheim/
+volumes:
+  valheimInstallation:
+    name: valheimInstallation
+  valheimWorldDatabase:
+    name: valheimWorldDatabase
